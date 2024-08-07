@@ -1,5 +1,11 @@
 const mysql = require('mysql')
 
+const superUserKey = process.env.APIKEY
+const dbHost = process.env.DB_HOST
+const dbUser = process.env.DB_USER
+const dbPassword = process.env.DB_PASSWORD
+const dbDatabase = process.env.DB_DATABASE
+
 const setSignupSession = (data, req, res) => {
   req.session.user = {
     username: `${data.username}`,
@@ -41,7 +47,7 @@ class mysqlDB {
   }
 }
 
-const Stream = new mysqlDB('localhost', 'root', '', 'StoryStream-api')
+const Stream = new mysqlDB(dbHost, dbUser, dbPassword, dbDatabase)
 
 const exeQuery = (sql) => {
   return new Promise((resolve, reject) => {
@@ -56,6 +62,7 @@ const exeQuery = (sql) => {
   })
 }
 
+
 class user {
   constructor(data, req, res){
     this.data = data
@@ -63,6 +70,7 @@ class user {
     this.res = res
     this.dbQuery = ''
   }
+  
   signup(){
     this.dbQuery = `SELECT * FROM Users WHERE username = '${this.data.username}' AND email = '${this.data.email}'`
     Stream.db.connect((err) => {
@@ -107,12 +115,7 @@ class user {
           console.log(result)
       }
       })
-      
     })
-  }
-
-  checkSession(){
-    checkIfSession(this.req, this.res)
   }
 }
 
@@ -120,7 +123,7 @@ class superUser extends user{
   
   confirmSuperUser(){
     //this.req.session.username = req.query.api_key
-    if(this.data.apikey === 'Dannys-notepad_StoryStream-api'){
+    if(this.data.apikey === superUserKey){
       return true
     }else{
       return false
@@ -147,6 +150,7 @@ class superUser extends user{
       })
     })
   }
+  
   deleteUser(){
     this.dbQuery = `DELETE FROM Users WHERE Users.uniqueId = '${this.data.id}'`
     Stream.db.connect((err) => {

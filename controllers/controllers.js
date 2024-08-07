@@ -20,7 +20,6 @@ const signup = (req, res) => {
   }
   const User = new user(userSchema, req, res)
   User.signup()
-
 }
 
 const login = (req, res) => {
@@ -46,14 +45,6 @@ const allUsers = (req, res) => {
   }else{
     res.status(401).json({message: 'Your unathorized to view to route'})
   }
-}
-
-const getSession = (req, res) => {
-  let userSchema = {
-    username: 'User'
-  }
-  const User = new user(userSchema, req, res)
-  User.checkSession()
 }
 
 const deleteuser = (req, res) => {
@@ -135,12 +126,12 @@ const deleteBook = (req, res) => {
   }
 }
 
+
 module.exports = {
   index,
   signup,
   login,
   allUsers,
-  getSession,
   deleteuser,
   allBooks,
   addBook,

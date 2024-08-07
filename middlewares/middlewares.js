@@ -1,7 +1,12 @@
 const mysql = require('mysql')
 const { mysqlDB } = require('../models/models')
 
-const Stream = new mysqlDB('localhost', 'root', '', 'StoryStream-api')
+const dbHost = process.env.DB_HOST
+const dbUser = process.env.DB_USER
+const dbPassword = process.env.DB_PASSWORD
+const dbDatabase = process.env.DB_DATABASE
+
+const Stream = new mysqlDB(dbHost, dbUser, dbPassword, dbDatabase)
 
 const checkApiKey = (req, res, next) => {
   let dbQuery = `SELECT * FROM apiKeys WHERE apiKeys.apiKey = '${req.params.apikey}'`
