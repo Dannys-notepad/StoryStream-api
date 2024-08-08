@@ -33,6 +33,7 @@ app.use(sessions({
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+//app.use(express.xml())
 
 /**************** Access routes *****************/
 app.get('/', index)
@@ -57,5 +58,6 @@ app.delete('/superuser/:apikey/storybooks/delete/:id', deleteBook)
 
 /***************** API router ****************/
 app.use('/api/:apikey/storybooks', checkApiKey, storybooks)
+
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
