@@ -4,12 +4,16 @@ const { storybook } = require('./storybookmodel')
 //@route /api/{userapikey}/storybooks
 //@method GET
 const viewStoryBooks = (req, res) => {
-  let data = {
-    empty: null
-  }
   const StoryStream = new storybook()
-  
   StoryStream.viewAllStoryBooks(req, res)
+}
+
+//@des View a random story
+//@route /api/{userapikey}/storybooks/random
+//@method GET
+const viewRandomBook = (req, res) => {
+  const StoryStream = new storybook()
+  StoryStream.viewRandomStoryBooks(req, res)
 }
 
 //@des Find storybook by title
@@ -50,6 +54,7 @@ const viewBookByAuthor = (req, res) => {
 
 module.exports = {
   viewStoryBooks,
+  viewRandomBook,
   viewBookByTitle,
   viewBookById,
   viewBookByAuthor

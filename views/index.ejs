@@ -5,13 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome || StoryStream</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.min.css" >
+    <style>
+      body{
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+      header h1{
+        text-align: center;
+        font-size: 38px;
+      }
+      span{
+        font-weight: bold
+      }
+      footer{
+        text-align: center;
+      }
+      @media(min-width: 768px){
+        body{
+          padding-left: 100px;
+          padding-right: 100px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1><mark>StoryStream-API</mark></h1>
-    </header>
-    <main>
-      <h3>Welcome to StoryStream-API</h3>
-    </main>
-  </body>
+  <header>
+    <h1>StoryStream-api</h1>
+  </header>
+  <section>
+    <div class="intro">
+      <h2>What is StoryStream-api</h2>
+      <p>StoryStream-api is an easy-to-use, versatile Storybook REST API packed with stories, Developers can intergrate the API in their backend service or frontend application.</p>
+      <p>
+        A simple GET request can be used to fetch data via a browser or CURL.
+      </p>
+      <hr>
+      <hr>
+    </div>
+  </section>
+  <section>
+    <div class="howItWorks">
+      <h2>How Does it Work?</h2>
+      <p>To access the API you've got to have your API key, and to get an API key you need to create an account</p>
+      <hr>
+      <h3>Creating an account</h3>
+      <p>To create an account click the link below</p>
+      <p><a href="https://storystream-api.onrender.com/signup">https://storystream-api.onrender.com/signup</a></p>
+      <p>To login <a href="https://storystream-api.onrender.com/signup">https://storystream-api.onrender.com/signup</a></p>
+      <p>When you've successfully created your account you'll see your API key displayed</p>
+      <hr>
+      <hr>
+    </div>
+  </section>
+  <section>
+    <div class="howItWorks">
+      <h2>Fetching / Getting Storybooks</h2>
+      <hr>
+      <h3>Fetching all</h3>
+      <p><span>URL:</span> https://storystream-api.onrender.com/api/{your_api_key}/storybooks</p>
+      <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks</p>
+      <p>Returns a json object of all available Storybooks.</p>
+      <hr>
+      <h3>Fetching By ID</h3>
+      <p><span>URL:</span> https://storystream-api.onrender.com/api/{your_api_key}/storybooks/id/{bookid}</p>
+      <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks/id/jh5Hwkns</p>
+      <p>Returns a json object of the Storybook with the specified ID.</p>
+      <hr>
+      <h3>Fetching By Title</h3>
+      <p><span>URL:</span> https://storystream-api.onrender.com/api/{your_api_key}/storybooks/title/{Book-Title}</p>
+      <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks/id/The-Enchanted-Bookshop</p>
+      <p>Returns a json object of the Storybook with the specified title.</p>
+      <hr>
+      <h3>Fetching By Author</h3>
+      <p><span>URL:</span> https://storystream-api.onrender.com/api/{your_api_key}/storybooks/author/{Book-Author}</p>
+      <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks/author/Williams-Cole</p>
+      <p>Returns a json object of the Storybooks written by the author.</p>
+      <hr>
+      <h3>Fetching A Random Story</h3>
+      <p><span>URL:</span> https://storystream-api.onrender.com/api/{your_api_key}/storybooks/random</p>
+      <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks/random</p>
+      <p>Returns a json object of a random Storybook.</p>
+      <hr>
+      <hr>
+  </section>
+  <section>
+    <h2>Bonus Tip:</h2>
+    <p>You can also recieve responses in xml format by adding this query string <span>?restype=xml</span> to any Storybook you visit</p>
+    <p><span>Example:</span> https://storystream-api.onrender.com/api/Stream_usya6w/storybooks?restype=xml</p>
+  </section>
+  <footer>
+      <p>StoryStream-api is Open Source if you'd love to take a look or modify feel free to, <a href="https://github.com/Dannys-notepad/StoryStream-api" target="_blank">Link to repo</a>, please give the repo a star</p>
+      <p>Copyright &copy; 2024</p>
+    </footer>
+</body>
 </html>

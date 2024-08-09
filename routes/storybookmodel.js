@@ -9,6 +9,11 @@ const dbDatabase = process.env.DB_DATABASE
 
 const Stream = new mysqlDB(dbHost, dbUser, dbPassword, dbDatabase)
 
+const randomStory = (data) => {
+  let rand = Math.floor(Math.random() * data.length)
+  return data[rand]
+}
+
 const displayInXml = (data) => {
   const xml = `
     <Storybooks>
@@ -47,6 +52,26 @@ class storybook {
         }else{
 
           res.json({allBooks: result})
+        }
+      })
+    })
+  }
+  
+  viewRandomStoryBooks(req, res){
+    this.dbQuery = `SELECT * FROM Storybook`
+    Stream.db.connect((err) => {
+      if(err){
+        console.log(err)
+      }
+      Stream.db.query(this.dbQuery, (err, result) => {
+        if(err){
+          console.log(err)
+        }else if(req.query.restype === 'xml'){
+          this.util = displayInXml(randomStory(result))
+          res.header('Content-Type', 'application/xml').send(this.util)
+        }else{
+
+          res.json({allBooks: randomStory(result)})
         }
       })
     })
@@ -104,7 +129,7 @@ class storybook {
         if(err){
           console.log(err)
         }else if(result.length === 0){
-          res.status(404).json({message: `Book not found`})
+          res.status(404).json({message: `Author not found`})
         }else if(req.query.restype === 'xml'){
           this.util = displayInXml(result)
           res.header('Content-Type', 'application/xml').send(this.util)

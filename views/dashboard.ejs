@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryStream || Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.min.css" >
+    <style>
+      main{
+        background-color: #ffeedf;
+        border-radius: 10px;
+        margin-left: 30;
+        margin-right: 30;
+      }
+      @media(min-width: 768px){
+        main{
+          margin-left: 400px;
+          margin-right: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>StoryStream</h1>
+      <hr>
+    </header>
+    <main>
+      <h3><%= name %></h3>
+      <p>Your APIKEY <b><%= apiKey %></b></p>
+    </main>
+  </body>
+</html>

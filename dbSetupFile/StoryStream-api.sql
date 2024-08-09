@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2024 at 11:27 AM
+-- Generation Time: Aug 09, 2024 at 06:38 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.2.6
 
@@ -39,14 +39,8 @@ CREATE TABLE `apiKeys` (
 --
 
 INSERT INTO `apiKeys` (`id`, `userId`, `apiKey`, `create_date`) VALUES
-(4, 'Oj469Lo3Tk', 'Stream_ElPmfjHHsS', '2024-08-05 09:52:21'),
-(5, 'otOu4tNoqq', 'Stream_YyJM1ONuS6', '2024-08-05 09:52:29'),
-(6, 'ps8rWRkrCV', 'Stream_RaZXIn36iB', '2024-08-05 09:52:40'),
-(7, 'tQ0Tw29Axf', 'Stream_j1RGFow2Mn', '2024-08-05 09:53:30'),
 (8, 'aTzrgQFC4h', 'Stream_kvsQlreL3W', '2024-08-06 08:21:31'),
-(9, 'ZINwqiRgGl', 'Stream_RZn6uvByZh', '2024-08-09 08:23:24'),
-(10, '3JIHvjYvqV', 'Stream_uBVtIsnLhI', '2024-08-09 08:38:32'),
-(11, 'UZz2F0O5Zo', 'Stream_96mLgCVlvt', '2024-08-09 08:59:28');
+(13, 'ctcniCvJR0', 'Stream_mEd5UBBxrA', '2024-08-09 14:38:37');
 
 -- --------------------------------------------------------
 
@@ -100,13 +94,7 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`id`, `uniqueId`, `username`, `email`, `password`, `apiKey`, `reg_date`) VALUES
-(25, 'ZINwqiRgGl', 'John', 'john@gmail.com', 'aWFtam9objE=', 'Stream_RZn6uvByZh', '2024-08-09 08:23:24'),
-(26, '3JIHvjYvqV', 'Joe', 'joe@gmail.com', 'aWFtam9lMTE=', 'Stream_uBVtIsnLhI', '2024-08-09 08:38:32'),
-(27, 'UZz2F0O5Zo', 'Joe mark', 'joemark@gmail.com', 'aWFtam9lbWE=', 'Stream_96mLgCVlvt', '2024-08-09 08:59:28'),
-(20, 'Oj469Lo3Tk', 'Max', 'max@gmail.com', 'aWFtbWF4', 'Stream_ElPmfjHHsS', '2024-08-05 09:52:21'),
-(21, 'otOu4tNoqq', 'Dean', 'dean@gmail.com', 'aWFtZGVhbg==', 'Stream_YyJM1ONuS6', '2024-08-05 09:52:29'),
-(22, 'ps8rWRkrCV', 'Raman', 'raman@gmail.com', 'aWFtcmFtYW4=', 'Stream_RaZXIn36iB', '2024-08-05 09:52:40'),
-(23, 'tQ0Tw29Axf', 'Dave', 'dave@gmail.com', 'aWFtZGF2ZQ==', 'Stream_j1RGFow2Mn', '2024-08-05 09:53:30'),
+(29, 'ctcniCvJR0', 'Danny', 'danny@gmail.com', 'MTIzNDU2Nzg5', 'Stream_mEd5UBBxrA', '2024-08-09 14:38:37'),
 (24, 'aTzrgQFC4h', 'Daniel', 'daniel@gmail.com', 'aWFtZGFuaWVs', 'Stream_kvsQlreL3W', '2024-08-06 08:21:31');
 
 --
@@ -139,13 +127,13 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `apiKeys`
 --
 ALTER TABLE `apiKeys`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

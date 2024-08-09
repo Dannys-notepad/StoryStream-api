@@ -14,7 +14,7 @@ const setSignupSession = (data, req, res) => {
     apiKey: `${data.apiKey}`
   }
 
-  res.status(201).json({message: `Hello @${req.session.user.username}`, apiKey: req.session.user.apiKey})
+  res.status(201).render('dashboard', {name: `Hello @${req.session.user.username}, welcome to StoryStream-api`, apiKey: `"${req.session.user.apiKey}"`})
 }
 
 const setLoginSession = (result, req, res) => {
@@ -24,7 +24,7 @@ const setLoginSession = (result, req, res) => {
     apiKey: result[0].apiKey
   }
 
-  res.json({message: `Welcome back @${req.session.user.username}`, apiKey: req.session.user.apiKey})
+  res.render('dashboard', {name: `Welcome back @${req.session.user.username}`, apiKey: `"${req.session.user.apiKey}"`})
 }
 
 

@@ -1,5 +1,3 @@
-const bcryptjs = require('bcryptjs')
-
 const generateUniqueId = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456u89'
   let result = ''

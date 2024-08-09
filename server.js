@@ -8,6 +8,8 @@ const { check, validationResult } = require('express-validator')
 const PORT = process.env.PORT
 
 const { index,
+  renderSignup,
+  renderLogin,
   signup,
   login,
   allUsers,
@@ -39,13 +41,13 @@ app.use(express.json())
 /**************** Access routes *****************/
 app.get('/', index)
 
-app.post('/signup', [
+app.route('/signup').get(renderSignup).post([
   check('username').isLength({min: 3, max: 20}).trim(),
   check('email').isEmail().normalizeEmail(),
   check('password').isLength({min: 8, max: 20})
 ], signup)
 
-app.post('/login', [
+app.route('/login').get(renderLogin).post([
   check('email').isEmail().normalizeEmail(),
   check('password').isLength({min: 8, max: 20})
 ], login)

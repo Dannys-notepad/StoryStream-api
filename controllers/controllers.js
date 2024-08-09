@@ -5,10 +5,17 @@ const { generateUniqueId, generateApiKey } = require('../utils')
 
 //@des documentation page
 //@route domain/
+//@method GET
 const index = (req, res) => {
   res.render('index')
 }
 
+//@des signup page
+//@route /signup
+//@method GET
+const renderSignup = (req, res) => {
+  res.render('signup')
+}
 
 //@des Signup
 //@route /signup
@@ -32,6 +39,13 @@ const signup = (req, res) => {
   }
   const User = new user(userSchema, req, res)
   User.signup()
+}
+
+//@des login page
+//@route /login
+//@method GET
+const renderLogin = (req, res) => {
+  res.render('login')
 }
 
 //@des Signup
@@ -168,6 +182,8 @@ const deleteBook = (req, res) => {
 
 module.exports = {
   index,
+  renderSignup,
+  renderLogin,
   signup,
   login,
   allUsers,

@@ -12,60 +12,48 @@
     </header>
     <main>
       <h2>Signup</h2>
-      <form>
+      <form method="POST" action="http://localhost:5000/signup">
         <label>
-          <input type="text" class="username" name="username" placeholder="Choose a Name">
+          <input type="text" class="username" name="username" placeholder="Choose a Name" required>
         </label>
         <label>
-          <input type="email" class="email" name="email" placeholder="Enter your Email">
+          <input type="email" class="email" name="email" placeholder="Enter your Email" required>
         </label>
         <label>
-          <input type="password" class="password" name="password" placeholder="Choose a unique password">
+          <input type="password" class="password" name="password" placeholder="Choose a unique password" required>
         </label>
         <button class="btn" type="submit">Create account</button>
       </form>
     </main>
     <script>
-      const username = document.querySelector('.username')
+      /*const username = document.querySelector('.username')
       const email = document.querySelector('.email')
       const password = document.querySelector('.password')
       const submitBtn = document.querySelector('.btn')
       const form = document.querySelector('form')
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
       
       form.addEventListener('submit', (e) => {
         e.preventDefault()
       })
       submitBtn.addEventListener('click', () => {
         try{
-          fetch('/process-form', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: username.value,
-            mail: email.value,
-            pass: password.value
+          const sendData = async (){
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            const response = await fetch('/signup', {
+            
+                method: "POST",
+                body: JSON.stringify({ username: username.value, email: email.value, password: password.value}),
+                headers: myHeaders,
             })
-          })
-          .then(response => response.json())
-          .then(data => alert(data))
-          .catch(error => console.error('Error:', error));
-          
-          /*
-          fetch("/process-form", {
-          method: "POST",
-          body: JSON.stringify({
-            name: username.value,
-            mail: email.value,
-            pass: password.value})
-          }).then(response => response.json())
-          .then(data => console.log(data))
-          .catch(error => console.error('Error:', error))*/
+          }
+          sendData.then(response => alert(response))
         }catch(e){
           alert(e)
         }
-      })
+      })*/
     </script>
   </body>
 </html>
