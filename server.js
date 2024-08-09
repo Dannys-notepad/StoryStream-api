@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const cookieParser = require("cookie-parser")
 const sessions = require('express-session')
+const { check, validationResult } = require('express-validator')
 const PORT = process.env.PORT
 
 const { index,
@@ -38,10 +39,16 @@ app.use(express.json())
 /**************** Access routes *****************/
 app.get('/', index)
 
-app.post('/signup', signup)
+app.post('/signup', [
+  check('username').isLength({min: 3, max: 20}).trim(),
+  check('email').isEmail().normalizeEmail(),
+  check('password').isLength({min: 8, max: 20})
+], signup)
 
-app.post('/login', login)
-
+app.post('/login', [
+  check('email').isEmail().normalizeEmail(),
+  check('password').isLength({min: 8, max: 20})
+], login)
 
 /************ Super User routes ****************/
 app.get('/superuser/:apikey/users', allUsers)

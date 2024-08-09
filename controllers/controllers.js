@@ -1,14 +1,26 @@
-const bcryptjs = require('bcryptjs')
+const { validationResult } = require('express-validator')
 
 const { user, superUser } = require('../models/models')
 const { generateUniqueId, generateApiKey } = require('../utils')
 
-
+//@des documentation page
+//@route domain/
 const index = (req, res) => {
   res.render('index')
 }
 
+
+//@des Signup
+//@route /signup
+//@method POST
 const signup = (req, res) => {
+  
+  const errors = validationResult(req)
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array(),
+      requirements: `Username min length 3, max length 20 - Password min length 8 and max length 20`,
+      reasonForError: `You're seeing this error because your username or password doesn't meet the requirements`})
+  }
   let { username, email, password } = req.body
   let hashedPass = btoa(password)
   let userSchema = {
@@ -22,7 +34,14 @@ const signup = (req, res) => {
   User.signup()
 }
 
+//@des Signup
+//@route /login
+//@method POST
 const login = (req, res) => {
+  const errors = validationResult(req)
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()})
+  }
   let { email, password } = req.body
   let hashedPass = btoa(password)
   let userSchema = {
@@ -33,6 +52,11 @@ const login = (req, res) => {
   User.login()
 }
 
+/********** Super user route functions *********/
+
+//@des See all users
+//@route /superuser/{apikey}/users
+//@method Get
 const allUsers = (req, res) => {
   let apikey = req.params.apikey
   let userSchema = {
@@ -47,6 +71,9 @@ const allUsers = (req, res) => {
   }
 }
 
+//@des Delete a user
+//@route /superuser/{apikey}/users/delete/{userid}
+//@method Delete
 const deleteuser = (req, res) => {
   let data = {
     id: req.params.id,
@@ -61,6 +88,9 @@ const deleteuser = (req, res) => {
   }
 }
 
+//@des See all Storybook
+//@route /superuser/{apikey}/storybooks
+//@method Get
 const allBooks = (req, res) => {
   let data = {
     apikey: req.params.apikey
@@ -74,6 +104,9 @@ const allBooks = (req, res) => {
   }
 }
 
+//@des Add a Storybook
+//@route /superuser/{apikey}/storybooks/add
+//@method POST
 const addBook = (req, res) => {
   let apikey = req.params.apikey
   let { bookTitle, bookBody, bookAuthor } = req.body
@@ -93,6 +126,9 @@ const addBook = (req, res) => {
   }
 }
 
+//@des Update a Storybook
+//@route /superuser/{apikey}/storybooks/update
+//@method Patch
 const updateBook = (req, res) => {
   let { body, id } = req.body
   let apikey = req.params.apikey
@@ -112,6 +148,9 @@ const updateBook = (req, res) => {
   }
 }
 
+//@des Delete a Storybook
+//@route /superuser/{apikey}/storybooks/delete/{bookid}
+//@method Delete
 const deleteBook = (req, res) => {
   let data = {
     id: req.params.id,

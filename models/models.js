@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 
+// .env variables
 const superUserKey = process.env.APIKEY
 const dbHost = process.env.DB_HOST
 const dbUser = process.env.DB_USER
@@ -26,11 +27,6 @@ const setLoginSession = (result, req, res) => {
   res.json({message: `Welcome back @${req.session.user.username}`, apiKey: req.session.user.apiKey})
 }
 
-const checkIfSession = (req, res) => {
-  let session = req.session.user
-  res.json({user: session})
-}
-
 
 class mysqlDB {
   constructor(host, user, password, database){
@@ -49,6 +45,7 @@ class mysqlDB {
 
 const Stream = new mysqlDB(dbHost, dbUser, dbPassword, dbDatabase)
 
+// this fumction is only used for inserting into database
 const exeQuery = (sql) => {
   return new Promise((resolve, reject) => {
     Stream.db.query(sql, (err, response) => {
@@ -56,7 +53,6 @@ const exeQuery = (sql) => {
         reject(err)
       }else{
         resolve(response)
-        //console.log(result)
       }
     })
   })
@@ -72,7 +68,7 @@ class user {
   }
   
   signup(){
-    this.dbQuery = `SELECT * FROM Users WHERE username = '${this.data.username}' AND email = '${this.data.email}'`
+    this.dbQuery = `SELECT * FROM Users WHERE username = ${mysql.escape(this.data.username)} AND email = '${this.data.email}'`
     Stream.db.connect((err) => {
       if(err){
         console.error(err)
@@ -83,7 +79,7 @@ class user {
         } else if(result.length > 0){
           this.res.status(401).json({message: 'This user already exist'})
         }else{
-          this.dbQuery = `INSERT INTO Users (uniqueId, username, email, password, apiKey) VALUES ('${this.data.uniqueId}', '${this.data.username}', '${this.data.email}', '${this.data.password}', '${this.data.apiKey}')`
+          this.dbQuery = `INSERT INTO Users (uniqueId, username, email, password, apiKey) VALUES ('${this.data.uniqueId}', ${mysql.escape(this.data.username)}, '${this.data.email}', ${mysql.escape(this.data.password)}, '${this.data.apiKey}')`
           Stream.db.query(this.dbQuery, (err, result) => {
             if(err){
               console.error(err)
@@ -100,7 +96,7 @@ class user {
   }
   
   login(){
-    this.dbQuery = `SELECT * FROM Users WHERE email = '${this.data.email}' AND password = '${this.data.password}'`
+    this.dbQuery = `SELECT * FROM Users WHERE email = '${this.data.email}' AND password = ${mysql.escape(this.data.password)}`
     Stream.db.connect((err) => {
       if(err){
         console.error(err)
@@ -122,7 +118,6 @@ class user {
 class superUser extends user{
   
   confirmSuperUser(){
-    //this.req.session.username = req.query.api_key
     if(this.data.apikey === superUserKey){
       return true
     }else{

@@ -1,5 +1,7 @@
+const mysql = require('mysql')
 const { mysqlDB } = require('../models/models')
 
+// .env variables
 const dbHost = process.env.DB_HOST
 const dbUser = process.env.DB_USER
 const dbPassword = process.env.DB_PASSWORD
@@ -43,6 +45,7 @@ class storybook {
           this.util = displayInXml(result)
           res.header('Content-Type', 'application/xml').send(this.util)
         }else{
+
           res.json({allBooks: result})
         }
       })
@@ -50,7 +53,7 @@ class storybook {
   }
 
   findStoryBookByName(data, req, res){
-    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.title = '${data.title}'`
+    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.title = ${mysql.escape(data.title)}`
     Stream.db.connect((err) => {
       if(err){
         console.log(err)
@@ -71,7 +74,7 @@ class storybook {
   }
   
   findStoryBookById(data, req, res){
-    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.id = '${data.id}'`
+    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.id = ${mysql.escape(data.id)}`
     Stream.db.connect((err) => {
       if(err){
         console.log(err)
@@ -92,7 +95,7 @@ class storybook {
   }
   
   findStoryBookByAuthor(data, req, res){
-    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.author = '${data.author}'`
+    this.dbQuery = `SELECT * FROM Storybook WHERE Storybook.author = ${mysql.escape(data.author)}`
     Stream.db.connect((err) => {
       if(err){
         console.log(err)
