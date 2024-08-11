@@ -27,6 +27,20 @@ const setLoginSession = (result, req, res) => {
   res.render('dashboard', {name: `Welcome back @${req.session.user.username}`, apiKey: `"${req.session.user.apiKey}"`})
 }
 
+const dbStatus = (req, res) => {
+  Stream.db.connect((err) => {
+    if(err){
+      console.log(err)
+    }
+    Stream.db.query(`SELECT * FROM Storybook`, (err, result) => {
+      if(err){
+        console.log(err)
+      }else{
+        res.render('index', {dbSummary: result.length})
+      }
+    })
+  })
+}
 
 class mysqlDB {
   constructor(host, user, password, database){
@@ -180,7 +194,7 @@ class superUser extends user{
     Stream.db.connect((err) => {
       if(err){
         console.log(err)
-      }
+      } 
       exeQuery(this.dbQuery)
       this.res.json({message: `Book titled ${this.data.title} added to database`})
     })
@@ -199,7 +213,7 @@ class superUser extends user{
         this.res.json({message: `Book '${this.data.id}' was successfully updated`})
       })
     })
-  }
+  } 
 
   deleteStoryBook(){
     this.dbQuery = `DELETE FROM Storybook WHERE Storybook.id = '${this.data.id}'`
@@ -219,6 +233,7 @@ class superUser extends user{
 
 
 module.exports = {
+  dbStatus,
   mysqlDB,
   user,
   superUser

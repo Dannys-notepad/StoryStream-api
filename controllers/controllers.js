@@ -1,13 +1,13 @@
 const { validationResult } = require('express-validator')
 
-const { user, superUser } = require('../models/models')
+const { dbStatus, user, superUser } = require('../models/models')
 const { generateUniqueId, generateApiKey } = require('../utils')
 
 //@des documentation page
 //@route domain/
 //@method GET
 const index = (req, res) => {
-  res.render('index')
+  dbStatus(req, res)
 }
 
 //@des signup page
